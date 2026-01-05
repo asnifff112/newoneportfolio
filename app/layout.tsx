@@ -1,10 +1,9 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import Navbar from "@/app/components/navbar";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Asnif Portfolio",
-  description: "Next.js · GSAP · Three.js Portfolio",
+  description: "Next.js + Tailwind + GSAP Portfolio",
 };
 
 export default function RootLayout({

@@ -1,17 +1,1 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --bg: #5E7788;
-  --surface: #6F8FA3;
-  --surface-dark: #4C6473;
-  --text: #F1F5F9;
-  --accent: #9FB8C9;
-  --accent-light: #C7D8E2;
-}
-
-body {
-  background-color: var(--bg);
-  color: var(--text);
-}
+@import "tailwindcss";
