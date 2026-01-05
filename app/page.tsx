@@ -39,7 +39,7 @@ export default function Page() {
     const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
 
     typeTl
-      .set(chars, { opacity: 0 }) // reset
+      .set(chars, { opacity: 0 }) 
       .to(chars, {
         opacity: 1,
         stagger: 0.08,
@@ -51,7 +51,7 @@ export default function Page() {
   return (
     <main className="relative z-10">
 
-      {/* ================= HERO ================= */}
+      
       <section
         id="home"
         ref={heroRef}
@@ -59,7 +59,7 @@ export default function Page() {
       >
         <div className="grid md:grid-cols-2 gap-16 max-w-7xl w-full items-center">
 
-          {/* TEXT */}
+         
           <div>
             <p className="hero-line text-sm tracking-widest uppercase opacity-70 mb-4">
               Hello, I’M
@@ -68,8 +68,6 @@ export default function Page() {
             <h1 className="hero-line text-6xl md:text-8xl font-bold mb-6">
               Asnif
             </h1>
-
-            {/* ONLY THIS LINE LOOPS */}
             <h2
               ref={typingRef}
               className="
