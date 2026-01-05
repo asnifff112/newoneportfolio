@@ -51,7 +51,7 @@ export default function Page() {
       >
         <div className="grid md:grid-cols-2 gap-16 max-w-7xl w-full items-center">
 
-          {/* ---------- TEXT SIDE ---------- */}
+         
           <div>
             <p className="hero-line text-sm tracking-widest uppercase opacity-70 mb-4">
               Hello, I'M
@@ -71,11 +71,11 @@ export default function Page() {
             </p>
           </div>
 
-          {/* ---------- IMAGE SIDE ---------- */}
+         
           <div className="relative w-full h-[480px] rounded-3xl overflow-hidden">
             <img
               ref={imageRef}
-              src="/profile.jpg"   // 🔁 replace with your photo
+              src="/profile.jpg" 
               alt="Asnif"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -85,7 +85,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ================= OTHER SECTIONS ================= */}
       <section id="about" className="min-h-screen relative">
         <About />
       </section>
