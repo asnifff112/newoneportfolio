@@ -7,8 +7,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import About from "@/app/components/sections/About";
 import Skills from "@/app/components/sections/Skills";
 import Projects from "@/app/components/sections/Projects";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/Footer";
+import Contact from "@/app/components/sections/Contact";
+import Footer from "@/app/components/footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
