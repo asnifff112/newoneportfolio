@@ -11,58 +11,80 @@ import Contact from "./components/sections/Contact";
 export default function Page() {
   const heroRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const typingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (!heroRef.current) return;
+    if (!heroRef.current || !typingRef.current) return;
 
-    const tl = gsap.timeline();
-
-    tl.from(".hero-line", {
+    /* ---------------- HERO INTRO (ONCE) ---------------- */
+    gsap.from(".hero-line", {
       y: 80,
       opacity: 0,
       stagger: 0.15,
       duration: 1,
       ease: "power4.out",
-    }).from(
-      imageRef.current,
-      {
-        scale: 0.9,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      },
-      "-=0.8"
-    );
+    });
+
+    gsap.from(imageRef.current, {
+      scale: 0.9,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.6,
+    });
+
+    /* ---------------- TYPE LOOP (ONLY THIS LINE) ---------------- */
+    const chars = typingRef.current.querySelectorAll(".char");
+
+    const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
+
+    typeTl
+      .set(chars, { opacity: 0 }) // reset
+      .to(chars, {
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.01,
+        ease: "none",
+      });
   }, []);
 
   return (
     <main className="relative z-10">
 
-      {/* ================= HERO / HOME ================= */}
+      {/* ================= HERO ================= */}
       <section
         id="home"
         ref={heroRef}
-        className="
-          min-h-screen
-          flex items-center justify-center
-          px-8
-          relative
-        "
+        className="min-h-screen flex items-center justify-center px-8"
       >
         <div className="grid md:grid-cols-2 gap-16 max-w-7xl w-full items-center">
 
-         
+          {/* TEXT */}
           <div>
             <p className="hero-line text-sm tracking-widest uppercase opacity-70 mb-4">
-              Hello, I'M
+              Hello, I’M
             </p>
 
-            <h1 className="hero-line text-6xl md:text-8xl font-bold leading-tight mb-6">
+            <h1 className="hero-line text-6xl md:text-8xl font-bold mb-6">
               Asnif
             </h1>
 
-            <h2 className="hero-line text-2xl md:text-3xl font-light opacity-80 mb-8">
-              Frontend Developer
+            {/* ONLY THIS LINE LOOPS */}
+            <h2
+              ref={typingRef}
+              className="
+                text-2xl md:text-3xl
+                font-light
+                opacity-80
+                mb-8
+                flex
+              "
+            >
+              {"Frontend Developer".split("").map((char, i) => (
+                <span key={i} className="char inline-block">
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
             </h2>
 
             <p className="hero-line max-w-md opacity-70 leading-relaxed">
@@ -71,11 +93,11 @@ export default function Page() {
             </p>
           </div>
 
-         
+          {/* IMAGE */}
           <div className="relative w-full h-[480px] rounded-3xl overflow-hidden">
             <img
               ref={imageRef}
-              src="/profile.jpg" 
+              src="/profile.jpg"   // 🔁 replace with your photo
               alt="Asnif"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -85,19 +107,20 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="about" className="min-h-screen relative">
+      {/* ================= OTHER SECTIONS ================= */}
+      <section id="about" className="min-h-screen">
         <About />
       </section>
 
-      <section id="skills" className="min-h-screen relative">
+      <section id="skills" className="min-h-screen">
         <Skills />
       </section>
 
-      <section id="projects" className="min-h-screen relative">
+      <section id="projects" className="min-h-screen">
         <Projects />
       </section>
 
-      <section id="contact" className="min-h-screen relative">
+      <section id="contact" className="min-h-screen">
         <Contact />
       </section>
 
