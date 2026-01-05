@@ -48,7 +48,6 @@ export default function About() {
         About Me
       </h2>
 
-      {/* About Card */}
       <div
         className="
           about-item
