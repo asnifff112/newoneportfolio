@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/app/components/navbar";
+import BackgroundScene from "@/app/components/three/BackgroundScene"
 
 export const metadata = {
   title: "Asnif Portfolio",
@@ -15,7 +16,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
+        <main className="pt-20 relative z-10">
         {children}
+        </main>
       </body>
     </html>
   );

@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
+
+:root {
+  --bg: #11120D;          /* Smoky Black */
+  --surface: #565449;     /* Olive Drab */
+  --muted: #D8CFBC;       /* Bone */
+  --text: #FFFBF4;        /* Floral White */
+}
+
 body {
-  background: black;
-  color: white;
+  background-color: var(--bg);
+  color: var(--text);
 }
