@@ -93,11 +93,11 @@ export default function Page() {
             </p>
           </div>
 
-          {/* IMAGE */}
+         
           <div className="relative w-full h-[480px] rounded-3xl overflow-hidden">
             <img
               ref={imageRef}
-              src="/profile.jpg"   // 🔁 replace with your photo
+              src="/profile.jpg"   
               alt="Asnif"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -107,7 +107,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ================= OTHER SECTIONS ================= */}
+
       <section id="about" className="min-h-screen">
         <About />
       </section>
