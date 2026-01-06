@@ -95,7 +95,7 @@ export default function Page() {
           <div className="relative w-full h-[480px] rounded-3xl overflow-hidden">
             <img
               ref={imageRef}
-              src="/profile.jpg"   
+              src="/asniff.jpeg"   
               alt="Asnif"
               className="absolute inset-0 w-full h-full object-cover"
             />
