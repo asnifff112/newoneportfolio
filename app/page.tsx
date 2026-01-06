@@ -16,7 +16,7 @@ export default function Page() {
   useEffect(() => {
     if (!heroRef.current || !typingRef.current) return;
 
-    /* ---------------- HERO INTRO (ONCE) ---------------- */
+   
     gsap.from(".hero-line", {
       y: 80,
       opacity: 0,
@@ -33,7 +33,7 @@ export default function Page() {
       delay: 0.6,
     });
 
-    /* ---------------- TYPE LOOP (ONLY THIS LINE) ---------------- */
+    
     const chars = typingRef.current.querySelectorAll(".char");
 
     const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
