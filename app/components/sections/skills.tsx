@@ -4,7 +4,6 @@ import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef, useMemo } from "react";
 
-/* ---------------- ICON LIST (PNG ONLY) ---------------- */
 const ICONS = [
   { name: "HTML", src: "/icons/html.png" },
   { name: "CSS", src: "/icons/css-3.png" },
@@ -13,20 +12,16 @@ const ICONS = [
   { name: "Next.js", src: "/icons/nextjs.png" },
 ];
 
-/* ---------------- FLOATING ICON ---------------- */
 function FloatingIcon({ src }: { src: string }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const texture = useLoader(THREE.TextureLoader, src);
 
-  // random start + motion (one-time)
-  const data = useMemo(() => {
-    return {
-      x: (Math.random() - 0.5) * 6,
-      y: (Math.random() - 0.5) * 4,
-      vx: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
-      vy: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
-    };
-  }, []);
+  const data = useMemo(() => ({
+    x: (Math.random() - 0.5) * 6,
+    y: (Math.random() - 0.5) * 4,
+    vx: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+    vy: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+  }), []);
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;
@@ -34,7 +29,6 @@ function FloatingIcon({ src }: { src: string }) {
     data.x += data.vx * delta;
     data.y += data.vy * delta;
 
-    // smooth bounds (no sudden stops)
     if (data.x > 3.2 || data.x < -3.2) data.vx *= -1;
     if (data.y > 2.2 || data.y < -2.2) data.vy *= -1;
 
@@ -44,35 +38,26 @@ function FloatingIcon({ src }: { src: string }) {
   return (
     <mesh ref={meshRef}>
       <planeGeometry args={[1.15, 1.15]} />
-      <meshBasicMaterial
-        map={texture}
-        transparent
-        opacity={0.95}
-      />
+      <meshBasicMaterial map={texture} transparent opacity={0.95} />
     </mesh>
   );
 }
 
-/* ---------------- SCENE ---------------- */
 function FloatingIconsScene() {
   return (
     <>
-      {ICONS.map((icon) => (
+      {ICONS.map(icon => (
         <FloatingIcon key={icon.name} src={icon.src} />
       ))}
     </>
   );
 }
 
-/* ---------------- MAIN SKILLS ---------------- */
 export default function Skills() {
   return (
     <section
       id="skills"
-      className="
-        relative min-h-screen w-full overflow-hidden
-        bg-[var(--bg)]
-      "
+      className="relative min-h-screen w-full overflow-hidden bg-[var(--bg)]"
     >
       {/* TEXT */}
       <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 text-center">
@@ -84,16 +69,13 @@ export default function Skills() {
         </p>
       </div>
 
-      {/* THREE.JS AREA */}
+      {/* THREE.JS */}
       <div className="absolute inset-0">
         <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
           <ambientLight intensity={1} />
           <FloatingIconsScene />
         </Canvas>
       </div>
-
-      {/* subtle gradient overlay (premium feel) */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
     </section>
   );
 }

@@ -7,6 +7,7 @@ import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
+import MovingBanner from "./components/MovingBanner";
 
 export default function Page() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -16,7 +17,7 @@ export default function Page() {
   useEffect(() => {
     if (!heroRef.current || !typingRef.current) return;
 
-   
+    /* HERO TEXT ANIMATION */
     gsap.from(".hero-line", {
       y: 80,
       opacity: 0,
@@ -25,6 +26,7 @@ export default function Page() {
       ease: "power4.out",
     });
 
+    /* IMAGE ANIMATION */
     gsap.from(imageRef.current, {
       scale: 0.9,
       opacity: 0,
@@ -33,25 +35,28 @@ export default function Page() {
       delay: 0.6,
     });
 
-    
+    /* TYPING EFFECT */
     const chars = typingRef.current.querySelectorAll(".char");
-
-    const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
+    const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
 
     typeTl
-      .set(chars, { opacity: 0 }) 
+      .set(chars, { opacity: 0 })
       .to(chars, {
         opacity: 1,
         stagger: 0.08,
         duration: 0.01,
         ease: "none",
       });
+
+    return () => {
+      typeTl.kill();
+    };
   }, []);
 
   return (
-    <main className="relative z-10">
+    <main className="relative z-10 bg-[var(--bg)] text-[var(--text)]">
 
-      
+      {/* ================= HERO ================= */}
       <section
         id="home"
         ref={heroRef}
@@ -59,24 +64,19 @@ export default function Page() {
       >
         <div className="grid md:grid-cols-2 gap-16 max-w-7xl w-full items-center">
 
-         
+          {/* TEXT */}
           <div>
             <p className="hero-line text-sm tracking-widest uppercase opacity-70 mb-4">
-              Hello, I’M
+              Hello, I’m
             </p>
 
             <h1 className="hero-line text-6xl md:text-8xl font-bold mb-6">
               Asnif
             </h1>
+
             <h2
               ref={typingRef}
-              className="
-                text-2xl md:text-3xl
-                font-light
-                opacity-80
-                mb-8
-                flex
-              "
+              className="text-2xl md:text-3xl font-light opacity-80 mb-8 flex"
             >
               {"Frontend Developer".split("").map((char, i) => (
                 <span key={i} className="char inline-block">
@@ -91,21 +91,24 @@ export default function Page() {
             </p>
           </div>
 
-         
+        
           <div className="relative w-full h-[480px] rounded-3xl overflow-hidden">
             <img
               ref={imageRef}
-              src="/asniff.jpeg"   
+              src="/asniff.jpeg"
               alt="Asnif"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/25" />
+            <div className="absolute inset-0 bg-[var(--bg)]/20" />
           </div>
 
         </div>
       </section>
 
+   
+      <MovingBanner />
 
+     
       <section id="about" className="min-h-screen">
         <About />
       </section>
@@ -114,10 +117,12 @@ export default function Page() {
         <Skills />
       </section>
 
+    
       <section id="projects" className="min-h-screen">
         <Projects />
       </section>
 
+      
       <section id="contact" className="min-h-screen">
         <Contact />
       </section>
