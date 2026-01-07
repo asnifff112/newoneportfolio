@@ -1,130 +1,99 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
+import { useRef, useMemo } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-/* ---------- SKILL DATA ---------- */
-const skills = [
-  { name: "HTML5", color: "#E34F26" },
-  { name: "CSS3", color: "#1572B6" },
-  { name: "JavaScript", color: "#F7DF1E" },
-  { name: "React", color: "#61DAFB" },
-  { name: "Tailwind", color: "#38BDF8" },
-  { name: "Redux", color: "#764ABC" },
-  { name: "GSAP", color: "#88CE02" },
-  { name: "GitHub", color: "#FFFFFF" },
+/* ---------------- ICON LIST (PNG ONLY) ---------------- */
+const ICONS = [
+  { name: "HTML", src: "/icons/html.png" },
+  { name: "CSS", src: "/icons/css-3.png" },
+  { name: "JavaScript", src: "/icons/js.png" },
+  { name: "React", src: "/icons/react.png" },
+  { name: "Next.js", src: "/icons/nextjs.png" },
 ];
 
-/* ---------- 3D ICON SHAPE ---------- */
-function FloatingIcon({ color }: { color: string }) {
+/* ---------------- FLOATING ICON ---------------- */
+function FloatingIcon({ src }: { src: string }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const texture = useLoader(THREE.TextureLoader, src);
 
-  useFrame(({ clock }) => {
+  // random start + motion (one-time)
+  const data = useMemo(() => {
+    return {
+      x: (Math.random() - 0.5) * 6,
+      y: (Math.random() - 0.5) * 4,
+      vx: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+      vy: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+    };
+  }, []);
+
+  useFrame((_, delta) => {
     if (!meshRef.current) return;
-    const t = clock.getElapsedTime();
 
-    // Subtle motion (not full spin)
-    meshRef.current.rotation.y += 0.01;
-    meshRef.current.rotation.x = Math.sin(t * 0.6) * 0.2;
-    meshRef.current.position.y = Math.sin(t) * 0.15;
+    data.x += data.vx * delta;
+    data.y += data.vy * delta;
+
+    // smooth bounds (no sudden stops)
+    if (data.x > 3.2 || data.x < -3.2) data.vx *= -1;
+    if (data.y > 2.2 || data.y < -2.2) data.vy *= -1;
+
+    meshRef.current.position.set(data.x, data.y, 0);
   });
 
   return (
     <mesh ref={meshRef}>
-      <icosahedronGeometry args={[1, 1]} />
-      <meshStandardMaterial
-        color={color}
-        roughness={0.4}
-        metalness={0.6}
+      <planeGeometry args={[1.15, 1.15]} />
+      <meshBasicMaterial
+        map={texture}
+        transparent
+        opacity={0.95}
       />
     </mesh>
   );
 }
 
+/* ---------------- SCENE ---------------- */
+function FloatingIconsScene() {
+  return (
+    <>
+      {ICONS.map((icon) => (
+        <FloatingIcon key={icon.name} src={icon.src} />
+      ))}
+    </>
+  );
+}
+
+/* ---------------- MAIN SKILLS ---------------- */
 export default function Skills() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  /* ---------- GSAP ENTRY ---------- */
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    gsap.fromTo(
-      containerRef.current.querySelectorAll(".skill-card"),
-      { opacity: 0, y: 60, scale: 0.9 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-        },
-      }
-    );
-  }, []);
-
   return (
     <section
-      ref={containerRef}
+      id="skills"
       className="
-        min-h-screen w-full
-        flex flex-col items-center justify-center
-        px-8
-        text-[var(--text)]
+        relative min-h-screen w-full overflow-hidden
+        bg-[var(--bg)]
       "
     >
-      {/* ---------- TITLE ---------- */}
-      <h2 className="text-5xl font-bold mb-4 tracking-wide">
-        My Skills
-      </h2>
-
-      <p className="text-sm opacity-70 mb-14 text-center max-w-md">
-        Technologies I use to build modern, interactive web experiences.
-      </p>
-
-      {/* ---------- GRID ---------- */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="
-              skill-card
-              relative
-              w-[180px] h-[200px]
-              rounded-2xl
-              bg-[var(--surface-dark)]/70
-              backdrop-blur-xl
-              border border-white/10
-              shadow-xl
-              flex flex-col items-center justify-center
-              hover:scale-105
-              transition-transform duration-300
-            "
-          >
-            {/* ---------- 3D ICON ---------- */}
-            <div className="w-full h-[110px]">
-              <Canvas camera={{ position: [0, 0, 4] }}>
-                <ambientLight intensity={0.9} />
-                <directionalLight position={[3, 3, 3]} intensity={1.2} />
-                <FloatingIcon color={skill.color} />
-              </Canvas>
-            </div>
-
-            {/* ---------- LABEL ---------- */}
-            <p className="mt-4 text-sm tracking-wider opacity-90">
-              {skill.name}
-            </p>
-          </div>
-        ))}
+      {/* TEXT */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-[var(--text)] mb-3">
+          My Skills
+        </h2>
+        <p className="text-sm md:text-base opacity-70 text-[var(--text)]">
+          Technologies I work with daily
+        </p>
       </div>
+
+      {/* THREE.JS AREA */}
+      <div className="absolute inset-0">
+        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+          <ambientLight intensity={1} />
+          <FloatingIconsScene />
+        </Canvas>
+      </div>
+
+      {/* subtle gradient overlay (premium feel) */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
     </section>
   );
 }
