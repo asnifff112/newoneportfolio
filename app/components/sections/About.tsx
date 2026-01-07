@@ -27,7 +27,7 @@ function AsnifText() {
       fontSize={1.8}
       letterSpacing={-0.06}
       position={[0, 0, 0]}
-      color="#565449" // Olive Drab
+      color="#565449" 
     >
       ASNIF
     </Text>
@@ -39,7 +39,7 @@ export default function About() {
   const textRef = useRef<HTMLDivElement>(null);
   const threeRef = useRef<HTMLDivElement>(null);
 
-  /* ---------- GSAP ENTRY (ON LOAD) ---------- */
+  
   useEffect(() => {
     if (!sectionRef.current) return;
 
