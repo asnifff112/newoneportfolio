@@ -8,6 +8,14 @@ import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
 import MovingBanner from "./components/MovingBanner";
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+  FaPhone,
+  
+} from "react-icons/fa";
+
 
 export default function Page() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -85,10 +93,61 @@ export default function Page() {
               ))}
             </h2>
 
-            <p className="hero-line max-w-md opacity-70 leading-relaxed">
-              I build modern, animated, and high-performance web experiences
-              using Next.js, GSAP, and Three.js.
-            </p>
+           <p className="hero-line max-w-md opacity-70 leading-relaxed">
+  I build modern, animated, and high-performance web experiences
+  using Next.js, GSAP, and Three.js.
+</p>
+
+{/* ===== HERO CONTACT ICONS ===== */}
+<div className="hero-line mt-6 flex items-center gap-5">
+  {/* Phone */}
+  <a
+    href="tel:+919999999999"
+    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
+    aria-label="Phone"
+  >
+    <FaPhone className="w-5 h-5" />
+  </a>
+
+  {/* Instagram */}
+  <a
+    href="https://instagram.com/yourusername"
+    target="_blank"
+    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
+  >
+    <FaInstagram className="w-5 h-5" />
+  </a>
+
+  {/* LinkedIn */}
+  <a
+    href="https://linkedin.com/in/yourusername"
+    target="_blank"
+    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
+  >
+    <FaLinkedin className="w-5 h-5" />
+  </a>
+
+  {/* GitHub */}
+  <a
+    href="https://github.com/yourusername"
+    target="_blank"
+    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
+  >
+    <FaGithub className="w-5 h-5" />
+  </a>
+
+  {/* Resume */}
+  <a
+    href="/resume.pdf"
+    download
+    className="px-5 py-3 rounded-full text-sm font-medium
+               bg-[var(--accent)] text-black hover:opacity-90 transition"
+  >
+    Download CV
+  </a>
+</div>
+
+
           </div>
 
         
