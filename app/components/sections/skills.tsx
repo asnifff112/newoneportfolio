@@ -1,30 +1,38 @@
 "use client";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import * as THREE from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 import { useRef, useMemo } from "react";
+import * as THREE from "three";
+
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+} from "react-icons/fa";
+import { SiNextdotjs } from "react-icons/si";
 
 const ICONS = [
-  { name: "HTML", src: "/icons/html.png" },
-  { name: "CSS", src: "/icons/css-3.png" },
-  { name: "JavaScript", src: "/icons/js.png" },
-  { name: "React", src: "/icons/react.png" },
-  { name: "Next.js", src: "/icons/nextjs.png" },
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  SiNextdotjs,
 ];
 
-function FloatingIcon({ src }: { src: string }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const texture = useLoader(THREE.TextureLoader, src);
+function FloatingIcon({ Icon }: { Icon: any }) {
+  const ref = useRef<THREE.Group>(null);
 
   const data = useMemo(() => ({
     x: (Math.random() - 0.5) * 6,
     y: (Math.random() - 0.5) * 4,
-    vx: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
-    vy: (Math.random() * 0.35 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+    vx: (Math.random() * 0.3 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+    vy: (Math.random() * 0.3 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
   }), []);
 
   useFrame((_, delta) => {
-    if (!meshRef.current) return;
+    if (!ref.current) return;
 
     data.x += data.vx * delta;
     data.y += data.vy * delta;
@@ -32,22 +40,23 @@ function FloatingIcon({ src }: { src: string }) {
     if (data.x > 3.2 || data.x < -3.2) data.vx *= -1;
     if (data.y > 2.2 || data.y < -2.2) data.vy *= -1;
 
-    meshRef.current.position.set(data.x, data.y, 0);
+    ref.current.position.set(data.x, data.y, 0);
   });
 
   return (
-    <mesh ref={meshRef}>
-      <planeGeometry args={[1.15, 1.15]} />
-      <meshBasicMaterial map={texture} transparent opacity={0.95} />
-    </mesh>
+    <group ref={ref}>
+      <Html center>
+        <Icon size={42} color="white" />
+      </Html>
+    </group>
   );
 }
 
 function FloatingIconsScene() {
   return (
     <>
-      {ICONS.map(icon => (
-        <FloatingIcon key={icon.name} src={icon.src} />
+      {ICONS.map((Icon, i) => (
+        <FloatingIcon key={i} Icon={Icon} />
       ))}
     </>
   );
@@ -69,7 +78,7 @@ export default function Skills() {
         </p>
       </div>
 
-      {/* THREE.JS */}
+      {/* THREE */}
       <div className="absolute inset-0">
         <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
           <ambientLight intensity={1} />
