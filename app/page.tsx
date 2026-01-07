@@ -13,6 +13,7 @@ import {
   FaLinkedin,
   FaGithub,
   FaPhone,
+  FaDownload,
   
 } from "react-icons/fa";
 
@@ -100,52 +101,79 @@ export default function Page() {
 
 {/* ===== HERO CONTACT ICONS ===== */}
 <div className="hero-line mt-6 flex items-center gap-5">
-  {/* Phone */}
-  <a
-    href="tel:+919999999999"
-    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
-    aria-label="Phone"
-  >
-    <FaPhone className="w-5 h-5" />
-  </a>
 
-  {/* Instagram */}
-  <a
-    href="https://instagram.com/yourusername"
-    target="_blank"
-    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
-  >
-    <FaInstagram className="w-5 h-5" />
-  </a>
+  {/* Reusable icon style */}
+  {[
+    {
+      href: "tel:+919999999999",
+      icon: <FaPhone />,
+      label: "Phone",
+    },
+    {
+      href: "https://instagram.com/yourusername",
+      icon: <FaInstagram />,
+      label: "Instagram",
+    },
+    {
+      href: "https://linkedin.com/in/yourusername",
+      icon: <FaLinkedin />,
+      label: "LinkedIn",
+    },
+    {
+      href: "https://github.com/yourusername",
+      icon: <FaGithub />,
+      label: "GitHub",
+    },
+    {
+      href: "/resume.pdf",
+      icon: <FaDownload />,
+      label: "Resume",
+      download: true,
+    },
+  ].map(({ href, icon, label, download }) => (
+    <a
+      key={label}
+      href={href}
+      download={download}
+      target={download ? undefined : "_blank"}
+      aria-label={label}
+      className="
+        group
+        relative
+        p-3
+        rounded-full
+        bg-[var(--surface)]
+        text-[var(--text)]
+        transition-all duration-300
+        hover:bg-[var(--accent)]
+        hover:text-black
+        hover:-translate-y-1
+        hover:shadow-lg
+        hover:shadow-[var(--accent)]/40
+      "
+    >
+      {/* Glow ring */}
+      <span
+        className="
+          absolute inset-0
+          rounded-full
+          border border-[var(--accent)]/40
+          opacity-0
+          scale-90
+          group-hover:opacity-100
+          group-hover:scale-110
+          transition-all duration-300
+        "
+      />
 
-  {/* LinkedIn */}
-  <a
-    href="https://linkedin.com/in/yourusername"
-    target="_blank"
-    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
-  >
-    <FaLinkedin className="w-5 h-5" />
-  </a>
-
-  {/* GitHub */}
-  <a
-    href="https://github.com/yourusername"
-    target="_blank"
-    className="p-3 rounded-full bg-[var(--surface)] hover:bg-[var(--accent)] transition"
-  >
-    <FaGithub className="w-5 h-5" />
-  </a>
-
-  {/* Resume */}
-  <a
-    href="/resume.pdf"
-    download
-    className="px-5 py-3 rounded-full text-sm font-medium
-               bg-[var(--accent)] text-black hover:opacity-90 transition"
-  >
-    Download CV
-  </a>
+      {/* Icon */}
+      <span className="relative z-10 w-5 h-5 block text-lg">
+        {icon}
+      </span>
+    </a>
+  ))}
 </div>
+
 
 
           </div>
