@@ -26,7 +26,6 @@ export default function Page() {
   useEffect(() => {
     if (!heroRef.current || !typingRef.current) return;
 
-    /* HERO TEXT ANIMATION */
     gsap.from(".hero-line", {
       y: 80,
       opacity: 0,
@@ -35,7 +34,7 @@ export default function Page() {
       ease: "power4.out",
     });
 
-    /* IMAGE ANIMATION */
+   
     gsap.from(imageRef.current, {
       scale: 0.9,
       opacity: 0,
@@ -44,7 +43,6 @@ export default function Page() {
       delay: 0.6,
     });
 
-    /* TYPING EFFECT */
     const chars = typingRef.current.querySelectorAll(".char");
     const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
 
