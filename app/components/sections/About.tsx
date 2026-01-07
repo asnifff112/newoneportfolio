@@ -6,7 +6,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import * as THREE from "three";
 
-/* ---------- 3D TEXT : ASNIF (SUBTLE ANIMATION) ---------- */
 function AsnifText() {
   const textRef = useRef<THREE.Mesh>(null);
 
@@ -15,7 +14,6 @@ function AsnifText() {
 
     const t = clock.getElapsedTime();
 
-    // ✅ Subtle premium motion (NO FULL ROTATION)
     textRef.current.position.y = Math.sin(t * 1.2) * 0.15;
     textRef.current.rotation.x = mouse.y * 0.15;
     textRef.current.rotation.y = mouse.x * 0.15;
