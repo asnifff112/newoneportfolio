@@ -21,7 +21,7 @@ function AnimatedHeart({
     if (!meshRef.current) return;
     const t = clock.getElapsedTime();
 
-    // subtle floating + breathing
+   
     meshRef.current.position.y = Math.sin(t) * 0.25;
     const s = 1 + Math.sin(t * 2) * 0.05;
     meshRef.current.scale.set(s, s, s);
@@ -183,9 +183,7 @@ export default function Contact() {
             Thank You
           </h3>
 
-          <p className="text-sm opacity-70 mb-4">
-            Click the heart ❤️
-          </p>
+          
 
           <Canvas camera={{ position: [0, 0, 6] }}>
             <ambientLight intensity={0.9} />
