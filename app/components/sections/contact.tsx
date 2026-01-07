@@ -8,7 +8,6 @@ import * as THREE from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ---------- HEART SHAPE (THREE.JS) ---------- */
 function AnimatedHeart({
   liked,
   onClick,
