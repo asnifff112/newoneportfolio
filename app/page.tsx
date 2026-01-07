@@ -12,7 +12,7 @@ import {
   FaInstagram,
   FaLinkedin,
   FaGithub,
-  FaPhone,
+  FaPhone, 
   FaDownload,
   
 } from "react-icons/fa";
@@ -20,7 +20,7 @@ import {
 
 export default function Page() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  
   const typingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -35,13 +35,7 @@ export default function Page() {
     });
 
    
-    gsap.from(imageRef.current, {
-      scale: 0.9,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.6,
-    });
+   
 
     const chars = typingRef.current.querySelectorAll(".char");
     const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
@@ -97,10 +91,8 @@ export default function Page() {
   using Next.js, GSAP, and Three.js.
 </p>
 
-{/* ===== HERO CONTACT ICONS ===== */}
 <div className="hero-line mt-6 flex items-center gap-5">
 
-  {/* Reusable icon style */}
   {[
     {
       href: "tel:+919746156270",
@@ -179,7 +171,7 @@ export default function Page() {
         
           <div className="relative w-full h-[480px] rounded-3xl overflow-hidden">
             <img
-              ref={imageRef}
+             
               src="/asniff.jpeg"
               alt="Asnif"
               className="absolute inset-0 w-full h-full object-cover"
