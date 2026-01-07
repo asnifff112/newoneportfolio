@@ -47,7 +47,7 @@ export default function MovingBanner() {
         "
       >
         {Array.from({ length: 20 }).map((_, i) => (
-          <span key={i}>FRONT-END</span>
+          <span key={i}>FRONT-END EXPERT</span>
         ))}
       </div>
     </div>
