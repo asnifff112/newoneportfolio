@@ -105,27 +105,27 @@ export default function Page() {
   {/* Reusable icon style */}
   {[
     {
-      href: "tel:+919999999999",
+      href: "tel:+919746156270",
       icon: <FaPhone />,
       label: "Phone",
     },
     {
-      href: "https://instagram.com/yourusername",
+      href: "https://instagram.com/4.ziiiii",
       icon: <FaInstagram />,
       label: "Instagram",
     },
     {
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://linkedin.com/in/Asnif-p",
       icon: <FaLinkedin />,
       label: "LinkedIn",
     },
     {
-      href: "https://github.com/yourusername",
+      href: "https://github.com/asnifff112",
       icon: <FaGithub />,
       label: "GitHub",
     },
     {
-      href: "/resume.pdf",
+      href: "/Asnif p.pdf",
       icon: <FaDownload />,
       label: "Resume",
       download: true,
