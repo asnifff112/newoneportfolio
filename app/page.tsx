@@ -152,7 +152,7 @@ export default function Page() {
         hover:shadow-[var(--accent)]/40
       "
     >
-      {/* Glow ring */}
+    
       <span
         className="
           absolute inset-0
