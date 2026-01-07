@@ -79,7 +79,7 @@ export default function About() {
     >
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl w-full items-center">
 
-        {/* ---------- LEFT : THREE.JS ---------- */}
+        
         <div
           ref={threeRef}
           className="
@@ -100,7 +100,7 @@ export default function About() {
           </Canvas>
         </div>
 
-        {/* ---------- RIGHT : ABOUT TEXT ---------- */}
+       
         <div ref={textRef}>
           <h2 className="text-5xl font-bold mb-6 tracking-wide">
             About Me
