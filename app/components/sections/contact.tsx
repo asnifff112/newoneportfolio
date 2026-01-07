@@ -44,10 +44,10 @@ function AnimatedHeart({
       geometry={geometry}
       onClick={onClick}
       scale={[0.35, 0.35, 0.35]}
-      rotation={[0, 0, Math.PI]} // ✅ HEART STRAIGHT FIX
+      rotation={[0, 0, Math.PI]} 
     >
       <meshStandardMaterial
-        color={liked ? "#ef4444" : "#D8CFBC"} // red when clicked
+        color={liked ? "#ef4444" : "#D8CFBC"} 
         roughness={0.35}
         metalness={0.2}
       />
@@ -107,7 +107,7 @@ export default function Contact() {
     >
       <div className="grid md:grid-cols-2 gap-14 max-w-6xl w-full items-center">
 
-        {/* ---------- CONTACT FORM ---------- */}
+      
         <div ref={formRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Contact
