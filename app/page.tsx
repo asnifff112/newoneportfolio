@@ -65,7 +65,7 @@ export default function Page() {
   return (
     <main className="relative z-10 bg-[var(--bg)] text-[var(--text)]">
 
-      {/* ================= HERO ================= */}
+      
       <section
         id="home"
         ref={heroRef}
@@ -73,7 +73,7 @@ export default function Page() {
       >
         <div className="grid md:grid-cols-2 gap-16 max-w-7xl w-full items-center">
 
-          {/* TEXT */}
+         
           <div>
             <p className="hero-line text-sm tracking-widest uppercase opacity-70 mb-4">
               Hello, I’m
