@@ -183,9 +183,7 @@ export default function Contact() {
             Thank You
           </h3>
 
-          <p className="text-sm opacity-70 mb-4 text-center max-w-xs">
-            Click the heart ❤️
-          </p>
+          
 
           <Canvas camera={{ position: [0, 0, 6] }}>
             <ambientLight intensity={0.9} />
