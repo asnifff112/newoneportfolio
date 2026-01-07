@@ -44,6 +44,7 @@ function AnimatedHeart({
       geometry={geometry}
       onClick={onClick}
       scale={[0.35, 0.35, 0.35]}
+      rotation={[0, 0, Math.PI]} // ✅ HEART STRAIGHT FIX
     >
       <meshStandardMaterial
         color={liked ? "#ef4444" : "#D8CFBC"} // red when clicked
@@ -167,7 +168,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ---------- HEART VISUAL ---------- */}
+      
         <div
           ref={visualRef}
           className="
@@ -183,7 +184,9 @@ export default function Contact() {
             Thank You
           </h3>
 
-          
+          <p className="text-sm opacity-70 mb-4">
+            Click the heart ❤️
+          </p>
 
           <Canvas camera={{ position: [0, 0, 6] }}>
             <ambientLight intensity={0.9} />
