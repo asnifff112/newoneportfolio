@@ -6,7 +6,7 @@ import { useRef, useMemo } from "react";
 import * as THREE from "three";
 
 
-import { SiApifox, SiCss3, SiFigma, SiGithub, SiHtml5, SiJavascript, SiNextdotjs, SiNodedotjs, SiReact, SiThreedotjs, SiTypescript } from "react-icons/si";
+import {  SiCss3, SiFigma, SiGithub, SiHtml5, SiJavascript, SiNextdotjs, SiNodedotjs, SiReact, SiThreedotjs, SiTypescript } from "react-icons/si";
 
 const ICONS = [
   SiHtml5,

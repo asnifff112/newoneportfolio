@@ -8,6 +8,7 @@ import * as THREE from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ---------- BROKEN → FULL HEART ---------- */
 function AnimatedHeart({
   liked,
   onClick,
@@ -15,19 +16,10 @@ function AnimatedHeart({
   liked: boolean;
   onClick: () => void;
 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const leftRef = useRef<THREE.Mesh>(null);
+  const rightRef = useRef<THREE.Mesh>(null);
 
-  useFrame(({ clock }) => {
-    if (!meshRef.current) return;
-    const t = clock.getElapsedTime();
-
-   
-    meshRef.current.position.y = Math.sin(t) * 0.25;
-    const s = 1 + Math.sin(t * 2) * 0.05;
-    meshRef.current.scale.set(s, s, s);
-  });
-
-  
+  // Heart shape
   const heartShape = new THREE.Shape();
   heartShape.moveTo(0, 0);
   heartShape.bezierCurveTo(0, 0, -1, -1, -2, 0);
@@ -37,20 +29,52 @@ function AnimatedHeart({
 
   const geometry = new THREE.ShapeGeometry(heartShape);
 
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+
+    // floating motion
+    const floatY = Math.sin(t) * 0.25;
+
+    // gap between broken parts
+    const gap = liked ? 0 : 0.35;
+
+    if (leftRef.current && rightRef.current) {
+      leftRef.current.position.set(-gap, floatY, 0);
+      rightRef.current.position.set(gap, floatY, 0);
+
+      // breathing scale
+      const s = 1 + Math.sin(t * 2) * 0.05;
+      leftRef.current.scale.set(s, s, s);
+      rightRef.current.scale.set(s, s, s);
+    }
+  });
+
   return (
-    <mesh
-      ref={meshRef}
-      geometry={geometry}
-      onClick={onClick}
+    <group
       scale={[0.35, 0.35, 0.35]}
-      rotation={[0, 0, Math.PI]} 
+      rotation={[0, 0, Math.PI]} // correct orientation
+      onClick={onClick}
     >
-      <meshStandardMaterial
-        color={liked ? "#ef4444" : "#D8CFBC"} 
-        roughness={0.35}
-        metalness={0.2}
-      />
-    </mesh>
+      {/* LEFT PART */}
+      <mesh ref={leftRef}>
+        <primitive object={geometry} />
+        <meshStandardMaterial
+          color={liked ? "#ef4444" : "#D8CFBC"}
+          roughness={0.35}
+          metalness={0.2}
+        />
+      </mesh>
+
+      {/* RIGHT PART */}
+      <mesh ref={rightRef}>
+        <primitive object={geometry} />
+        <meshStandardMaterial
+          color={liked ? "#ef4444" : "#D8CFBC"}
+          roughness={0.35}
+          metalness={0.2}
+        />
+      </mesh>
+    </group>
   );
 }
 
@@ -106,7 +130,7 @@ export default function Contact() {
     >
       <div className="grid md:grid-cols-2 gap-14 max-w-6xl w-full items-center">
 
-      
+        {/* ---------- CONTACT FORM ---------- */}
         <div ref={formRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Contact
@@ -167,7 +191,7 @@ export default function Contact() {
           </div>
         </div>
 
-      
+        {/* ---------- HEART VISUAL ---------- */}
         <div
           ref={visualRef}
           className="
@@ -183,7 +207,9 @@ export default function Contact() {
             Thank You
           </h3>
 
-          
+          <p className="text-sm opacity-70 mb-4">
+            Click the heart ❤️
+          </p>
 
           <Canvas camera={{ position: [0, 0, 6] }}>
             <ambientLight intensity={0.9} />
