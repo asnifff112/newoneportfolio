@@ -78,7 +78,6 @@ export default function Skills() {
         </p>
       </div>
 
-      {/* THREE */}
       <div className="absolute inset-0">
         <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
           <ambientLight intensity={1} />
