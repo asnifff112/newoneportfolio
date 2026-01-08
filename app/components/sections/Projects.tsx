@@ -77,7 +77,6 @@ export default function Projects() {
         Selected works showcasing my frontend and animation skills.
       </p>
 
-      {/* Projects Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl w-full">
         {projects.map((project, index) => (
           <div
