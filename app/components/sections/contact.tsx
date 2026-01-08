@@ -27,7 +27,7 @@ function AnimatedHeart({
     meshRef.current.scale.set(s, s, s);
   });
 
-  // Heart shape geometry
+  
   const heartShape = new THREE.Shape();
   heartShape.moveTo(0, 0);
   heartShape.bezierCurveTo(0, 0, -1, -1, -2, 0);
