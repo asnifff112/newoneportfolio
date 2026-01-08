@@ -33,10 +33,10 @@ export default function Footer() {
         Next.js, GSAP & Three.js
       </p>
 
-      {/* Divider */}
+   
       <div className="w-40 h-[1px] bg-[var(--accent)] mb-8" />
 
-      {/* Social Links */}
+     
       <div className="flex gap-6 text-sm uppercase tracking-widest">
         <a
           href="https://github.com/asnifff112"
@@ -60,7 +60,7 @@ export default function Footer() {
         </a>
       </div>
 
-      {/* Bottom text */}
+     
       <p className="mt-10 text-xs opacity-50">
         © {new Date().getFullYear()} Asnif · All rights reserved
       </p>
