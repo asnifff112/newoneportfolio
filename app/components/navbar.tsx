@@ -23,12 +23,10 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
 
-        {/* Logo */}
+  
         <h1 className="text-lg font-semibold tracking-wide text-[var(--text)]">
           Asnif
         </h1>
-
-        {/* Links */}
         <ul className="flex gap-8 text-sm text-[var(--muted)]">
           {["about", "skills", "projects", "contact"].map((item) => (
             <li key={item}>
