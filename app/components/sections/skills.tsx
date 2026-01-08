@@ -5,20 +5,21 @@ import { Html } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
 
-import {
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
-} from "react-icons/fa";
-import { SiNextdotjs } from "react-icons/si";
+
+import { SiApifox, SiCss3, SiFigma, SiGithub, SiHtml5, SiJavascript, SiNextdotjs, SiNodedotjs, SiReact, SiThreedotjs, SiTypescript } from "react-icons/si";
 
 const ICONS = [
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaReact,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
   SiNextdotjs,
+  SiThreedotjs,
+  SiTypescript,
+  SiGithub,
+  SiFigma,
+  SiNodedotjs
+  
 ];
 
 function FloatingIcon({ Icon }: { Icon: any }) {
