@@ -68,7 +68,7 @@ export default function Skills() {
       id="skills"
       className="relative min-h-screen w-full overflow-hidden bg-[var(--bg)]"
     >
-      {/* TEXT */}
+ 
       <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-[var(--text)] mb-3">
           My Skills
