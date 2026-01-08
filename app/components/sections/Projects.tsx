@@ -68,7 +68,7 @@ export default function Projects() {
         text-[var(--text)]
       "
     >
-      {/* Heading */}
+      
       <h2 className="text-4xl font-bold mb-4 tracking-wide">
         Projects
       </h2>
