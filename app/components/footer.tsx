@@ -23,12 +23,11 @@ export default function Footer() {
         px-6
       "
     >
-      {/* Name */}
       <h2 className="text-4xl font-bold mb-4 tracking-wide">
         Asnif
       </h2>
 
-      {/* Tagline */}
+     
       <p className="text-sm opacity-70 mb-8 text-center max-w-md">
         Frontend Developer building immersive web experiences with
         Next.js, GSAP & Three.js
