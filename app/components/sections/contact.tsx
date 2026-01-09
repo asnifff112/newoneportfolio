@@ -166,8 +166,6 @@ export default function Contact() {
             </form>
           </div>
         </div>
-
-      
         <div
           ref={visualRef}
           className="
