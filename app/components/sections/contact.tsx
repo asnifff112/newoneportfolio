@@ -108,11 +108,9 @@ export default function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Contact
           </h2>
-
           <p className="opacity-70 mb-8 max-w-md">
             Let’s connect and build something meaningful together.
           </p>
-
           <div
             className="
               p-8 rounded-2xl
