@@ -101,12 +101,9 @@ export default function Contact() {
         flex items-center justify-center
         px-8
         bg-[var(--bg)]
-        text-[var(--text)]
-      "
+        text-[var(--text)] "
     >
       <div className="grid md:grid-cols-2 gap-14 max-w-6xl w-full items-center">
-
-      
         <div ref={formRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Contact
