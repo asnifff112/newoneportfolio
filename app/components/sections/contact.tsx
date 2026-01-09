@@ -183,8 +183,6 @@ export default function Contact() {
             Thank You
           </h3>
 
-          
-
           <Canvas camera={{ position: [0, 0, 6] }}>
             <ambientLight intensity={0.9} />
             <directionalLight position={[3, 3, 3]} intensity={1} />
