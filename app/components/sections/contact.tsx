@@ -181,8 +181,7 @@ export default function Contact() {
         >
           <h3 className="text-2xl font-semibold mb-2">
             Thank You
-          </h3>
-
+          </h3
           <Canvas camera={{ position: [0, 0, 6] }}>
             <ambientLight intensity={0.9} />
             <directionalLight position={[3, 3, 3]} intensity={1} />
@@ -192,8 +191,7 @@ export default function Contact() {
             />
           </Canvas>
         </div>
-
-      </div>
+     </div>
     </section>
   );
 }
