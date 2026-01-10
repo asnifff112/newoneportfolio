@@ -154,10 +154,10 @@ export default function Page() {
             </div>
           </div>
 
-          {/* ---------- RIGHT IMAGE (AURA STYLE) ---------- */}
+         
           <div className="relative w-full h-[520px] flex items-center justify-center">
 
-            {/* BIG NAME BEHIND IMAGE */}
+          
             <h1
               className="
                 absolute
