@@ -188,10 +188,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ================= MOVING BANNER ================= */}
+     
       <MovingBanner />
 
-      {/* ================= SECTIONS ================= */}
+
       <section id="about" className="min-h-screen">
         <About />
       </section>
