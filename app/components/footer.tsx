@@ -20,9 +20,7 @@ export default function Footer() {
         flex flex-col items-center justify-center
         bg-[var(--surface-dark)]
         text-[var(--text)]
-        px-6
-      "
-    >
+        px-6" >
       <h2 className="text-4xl font-bold mb-4 tracking-wide">
         Asnif
       </h2>
