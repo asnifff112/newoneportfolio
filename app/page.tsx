@@ -156,8 +156,6 @@ export default function Page() {
 
          
           <div className="relative w-full h-[520px] flex items-center justify-center">
-
-          
             <h1
               className="
                 absolute
