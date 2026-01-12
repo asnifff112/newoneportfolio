@@ -18,9 +18,7 @@ export default function Navbar() {
       className="
         fixed top-0 left-0 w-full z-50
         bg-[var(--bg)]/80 backdrop-blur-md
-        border-b border-[var(--surface)]
-      "
-    >
+        border-b border-[var(--surface)]">
       <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
 
   
