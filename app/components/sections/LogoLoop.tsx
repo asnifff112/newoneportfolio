@@ -12,7 +12,7 @@ interface LogoLoopProps {
   speed?: number;
   direction?: "left" | "right";
   gap?: number;
-  logoHeight?: number;
+  logoSize?: number;
   className?: string;
 }
 
@@ -20,8 +20,8 @@ export default function LogoLoop({
   logos,
   speed = 80,
   direction = "left",
-  gap = 28,
-  logoHeight = 26,
+  gap = 56,
+  logoSize = 48,
   className = "",
 }: LogoLoopProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ export default function LogoLoop({
           >
             <span
               className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
-              style={{ height: logoHeight }}
+              style={{ fontSize: logoSize }}
             >
               {item.node}
             </span>

@@ -33,7 +33,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col justify-center gap-10"
+      className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col justify-center gap-12"
     >
       {/* TITLE */}
       <div className="text-center">
@@ -45,9 +45,8 @@ export default function Skills() {
       <LogoLoop
         logos={techLogos}
         speed={90}
-        logoHeight={26}
-        gap={28}
-        className="[&_*]:text-xl"
+        logoSize={56}
+        gap={64}
       />
 
       {/* ROW 2 */}
@@ -55,18 +54,18 @@ export default function Skills() {
         logos={techLogos}
         speed={70}
         direction="right"
-        logoHeight={24}
-        gap={26}
-        className="opacity-70 [&_*]:text-lg"
+        logoSize={52}
+        gap={60}
+        className="opacity-80"
       />
 
       {/* ROW 3 */}
       <LogoLoop
         logos={techLogos}
         speed={50}
-        logoHeight={22}
-        gap={24}
-        className="opacity-50 [&_*]:text-base"
+        logoSize={48}
+        gap={56}
+        className="opacity-60"
       />
     </section>
   );
