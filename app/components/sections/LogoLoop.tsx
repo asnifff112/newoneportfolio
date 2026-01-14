@@ -5,7 +5,6 @@ import { useEffect, useRef, useState, useMemo } from "react";
 type LogoItem = {
   node: React.ReactNode;
   title?: string;
-  href?: string;
 };
 
 interface LogoLoopProps {
@@ -19,10 +18,10 @@ interface LogoLoopProps {
 
 export default function LogoLoop({
   logos,
-  speed = 100,
+  speed = 80,
   direction = "left",
-  gap = 32,
-  logoHeight = 28,
+  gap = 28,
+  logoHeight = 26,
   className = "",
 }: LogoLoopProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -51,14 +50,11 @@ export default function LogoLoop({
         }}
       >
         {[...logos, ...logos].map((item, index) => (
-          <a
+          <div
             key={index}
-            href={item.href}
-            target="_blank"
-            rel="noreferrer"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            className="flex items-center"
+            className="flex items-center cursor-pointer"
             title={item.title}
           >
             <span
@@ -67,7 +63,7 @@ export default function LogoLoop({
             >
               {item.node}
             </span>
-          </a>
+          </div>
         ))}
       </div>
     </div>
