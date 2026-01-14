@@ -54,7 +54,7 @@ export default function Footer() {
         >
           Email
         </a>
-      </div>
+      </div> 
       <p className="mt-10 text-xs opacity-50">
         © {new Date().getFullYear()} Asnif · All rights reserved
       </p>
