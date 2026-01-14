@@ -2,17 +2,11 @@
 
 import { useEffect, useRef, useState, useMemo } from "react";
 
-type LogoItem =
-  | {
-      node: React.ReactNode;
-      title?: string;
-      href?: string;
-    }
-  | {
-      src: string;
-      alt?: string;
-      href?: string;
-    };
+type LogoItem = {
+  node: React.ReactNode;
+  title?: string;
+  href?: string;
+};
 
 interface LogoLoopProps {
   logos: LogoItem[];
@@ -20,31 +14,24 @@ interface LogoLoopProps {
   direction?: "left" | "right";
   gap?: number;
   logoHeight?: number;
-  fadeOut?: boolean;
-  fadeOutColor?: string;
-  scaleOnHover?: boolean;
   className?: string;
-  ariaLabel?: string;
 }
 
 export default function LogoLoop({
   logos,
-  speed = 120,
+  speed = 100,
   direction = "left",
-  gap = 48,
-  logoHeight = 40,
-  fadeOut = false,
-  fadeOutColor = "transparent",
-  scaleOnHover = false,
+  gap = 32,
+  logoHeight = 28,
   className = "",
-  ariaLabel = "Logo loop",
 }: LogoLoopProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
     if (!trackRef.current) return;
-    setWidth(trackRef.current.scrollWidth);
+    setWidth(trackRef.current.scrollWidth / 2);
   }, [logos]);
 
   const duration = useMemo(() => {
@@ -52,81 +39,37 @@ export default function LogoLoop({
   }, [width, speed]);
 
   return (
-    <div
-      className={`relative w-full overflow-hidden ${className}`}
-      aria-label={ariaLabel}
-      style={
-        fadeOut
-          ? {
-              maskImage: `linear-gradient(to right, transparent, ${fadeOutColor} 10%, ${fadeOutColor} 90%, transparent)`,
-              WebkitMaskImage: `linear-gradient(to right, transparent, ${fadeOutColor} 10%, ${fadeOutColor} 90%, transparent)`,
-            }
-          : undefined
-      }
-    >
+    <div className={`relative w-full overflow-hidden ${className}`}>
       <div
         ref={trackRef}
-        className="flex w-max items-center logoloop-track"
+        className="flex w-max items-center"
         style={{
-          gap: `${gap}px`,
+          gap,
           animation: `logoloop ${duration}s linear infinite`,
+          animationPlayState: paused ? "paused" : "running",
           animationDirection: direction === "left" ? "normal" : "reverse",
         }}
       >
-        {[...logos, ...logos].map((item, index) => {
-          const content =
-            "node" in item ? (
-              <span
-                className={`
-                  inline-flex items-center justify-center
-                  transition-transform duration-300
-                  ${scaleOnHover ? "hover:scale-110" : ""}
-                `}
-                style={{ height: logoHeight }}
-                title={item.title}
-              >
-                {item.node}
-              </span>
-            ) : (
-              <img
-                src={item.src}
-                alt={item.alt || ""}
-                style={{ height: logoHeight }}
-                className="object-contain"
-              />
-            );
-
-          return item.href ? (
-            <a
-              key={index}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center"
+        {[...logos, ...logos].map((item, index) => (
+          <a
+            key={index}
+            href={item.href}
+            target="_blank"
+            rel="noreferrer"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            className="flex items-center"
+            title={item.title}
+          >
+            <span
+              className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
+              style={{ height: logoHeight }}
             >
-              {content}
-            </a>
-          ) : (
-            <div key={index}>{content}</div>
-          );
-        })}
+              {item.node}
+            </span>
+          </a>
+        ))}
       </div>
-
-      {/* KEY CHANGE: PAUSE ON HOVER */}
-      <style jsx>{`
-        .logoloop-track:hover {
-          animation-play-state: paused;
-        }
-
-        @keyframes logoloop {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
     </div>
   );
 }

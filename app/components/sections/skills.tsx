@@ -16,76 +16,58 @@ import {
 } from "react-icons/si";
 
 const techLogos = [
-  { node: <SiHtml5 />, title: "HTML", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-  { node: <SiCss3 />, title: "CSS", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-  { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-  { node: <SiThreedotjs />, title: "Three.js", href: "https://threejs.org" },
-  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
-  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
-  { node: <SiFigma />, title: "Figma", href: "https://figma.com" },
+  { node: <SiHtml5 />, title: "HTML" },
+  { node: <SiCss3 />, title: "CSS" },
+  { node: <SiJavascript />, title: "JavaScript" },
+  { node: <SiReact />, title: "React" },
+  { node: <SiNextdotjs />, title: "Next.js" },
+  { node: <SiTypescript />, title: "TypeScript" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS" },
+  { node: <SiThreedotjs />, title: "Three.js" },
+  { node: <SiNodedotjs />, title: "Node.js" },
+  { node: <SiGithub />, title: "GitHub" },
+  { node: <SiFigma />, title: "Figma" },
 ];
 
 export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col justify-center overflow-hidden"
+      className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col justify-center gap-10"
     >
-      {/* ---------- TITLE ---------- */}
-      <div className="text-center mb-14 px-6">
-        <h2 className="text-4xl md:text-5xl font-bold mb-3">
-          My Skills
-        </h2>
-        <p className="opacity-70 text-sm md:text-base">
-          Technologies I work with daily
-        </p>
+      {/* TITLE */}
+      <div className="text-center">
+        <h2 className="text-4xl md:text-5xl font-bold">My Skills</h2>
+        <p className="opacity-70 mt-2">Technologies I work with</p>
       </div>
 
-      {/* ---------- LOGO LOOP ---------- */}
-      <div className="relative w-full">
-        <LogoLoop
-          logos={techLogos}
-          speed={100}
-          direction="left"
-          logoHeight={30}
-          gap={48}
-          scaleOnHover
-          fadeOut
-          fadeOutColor="var(--bg)"
-          ariaLabel="Technology skills"
-          className="
-            text-[var(--text)]
-            [&_.logoloop__node]:text-3xl
-            [&_.logoloop__node]:opacity-80
-            [&_.logoloop__node]:transition
-            [&_.logoloop__node:hover]:opacity-100
-            [&_.logoloop__node:hover]:text-[var(--accent)]
-          "
-        />
-      </div>
+      {/* ROW 1 */}
+      <LogoLoop
+        logos={techLogos}
+        speed={90}
+        logoHeight={26}
+        gap={28}
+        className="[&_*]:text-xl"
+      />
 
-      {/* ---------- SECOND ROW (OPTIONAL, OPPOSITE DIRECTION) ---------- */}
-      <div className="relative w-full mt-10">
-        <LogoLoop
-          logos={techLogos}
-          speed={80}
-          direction="right"
-          logoHeight={100}
-          gap={56}
-          fadeOut
-          fadeOutColor="var(--bg)"
-          ariaLabel="Technology skills secondary"
-          className="
-            text-[var(--text)]
-            opacity-60
-            [&_.logoloop__node:hover]:opacity-100
-          "
-        />
-      </div>
+      {/* ROW 2 */}
+      <LogoLoop
+        logos={techLogos}
+        speed={70}
+        direction="right"
+        logoHeight={24}
+        gap={26}
+        className="opacity-70 [&_*]:text-lg"
+      />
+
+      {/* ROW 3 */}
+      <LogoLoop
+        logos={techLogos}
+        speed={50}
+        logoHeight={22}
+        gap={24}
+        className="opacity-50 [&_*]:text-base"
+      />
     </section>
   );
 }
