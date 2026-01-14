@@ -52,11 +52,23 @@ export default function LogoLoop({
             key={index}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            className="flex items-center cursor-pointer"
+            className="
+              group
+              flex items-center
+              cursor-pointer
+            "
             title={item.title}
           >
             <span
-              className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
+              className="
+                flex items-center justify-center
+                transition-all duration-300 ease-out
+                group-hover:scale-110
+                group-hover:-rotate-3
+                group-hover:text-[var(--accent)]
+                drop-shadow-md
+                group-hover:[0_0_18px_var]
+              "
               style={{ fontSize: logoSize }}
             >
               {item.node}

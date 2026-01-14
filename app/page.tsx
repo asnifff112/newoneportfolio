@@ -8,6 +8,7 @@ import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
 import MovingBanner from "./components/MovingBanner";
+import TextPressure from "./components/sections/TextPressure";
 
 import {
   FaInstagram,
@@ -68,10 +69,16 @@ export default function Page() {
               Hello, I’m
             </p>
 
-            <h1 className="hero-line text-6xl md:text-8xl font-bold mb-6">
-              Asnif
-            </h1>
+            {/* TEXT PRESSURE NAME */}
+            <div className="hero-line mb-6">
+              <TextPressure
+                text="Asnif"
+                minFontSize={140}
+                textColor="var(--text)"
+              />
+            </div>
 
+            {/* TYPING ROLE */}
             <h2
               ref={typingRef}
               className="hero-line text-2xl md:text-3xl font-light opacity-80 mb-8 flex"
@@ -154,8 +161,9 @@ export default function Page() {
             </div>
           </div>
 
-         
+          {/* ---------- RIGHT IMAGE ---------- */}
           <div className="relative w-full h-[520px] flex items-center justify-center">
+            {/* BIG NAME BEHIND IMAGE */}
             <h1
               className="
                 absolute
@@ -186,10 +194,10 @@ export default function Page() {
         </div>
       </section>
 
-     
+      {/* ================= MOVING BANNER ================= */}
       <MovingBanner />
 
-
+      {/* ================= SECTIONS ================= */}
       <section id="about" className="min-h-screen">
         <About />
       </section>
