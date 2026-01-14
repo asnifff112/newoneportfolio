@@ -39,7 +39,6 @@ export default function LogoLoop({
   className = "",
   ariaLabel = "Logo loop",
 }: LogoLoopProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
 
@@ -48,15 +47,14 @@ export default function LogoLoop({
     setWidth(trackRef.current.scrollWidth);
   }, [logos]);
 
-  const animationDuration = useMemo(() => {
+  const duration = useMemo(() => {
     return width > 0 ? width / speed : 0;
   }, [width, speed]);
 
   return (
     <div
-      ref={containerRef}
-      aria-label={ariaLabel}
       className={`relative w-full overflow-hidden ${className}`}
+      aria-label={ariaLabel}
       style={
         fadeOut
           ? {
@@ -68,10 +66,10 @@ export default function LogoLoop({
     >
       <div
         ref={trackRef}
-        className="flex w-max items-center"
+        className="flex w-max items-center logoloop-track"
         style={{
           gap: `${gap}px`,
-          animation: `logoloop ${animationDuration}s linear infinite`,
+          animation: `logoloop ${duration}s linear infinite`,
           animationDirection: direction === "left" ? "normal" : "reverse",
         }}
       >
@@ -82,7 +80,7 @@ export default function LogoLoop({
                 className={`
                   inline-flex items-center justify-center
                   transition-transform duration-300
-                  ${scaleOnHover ? "hover:scale-125" : ""}
+                  ${scaleOnHover ? "hover:scale-110" : ""}
                 `}
                 style={{ height: logoHeight }}
                 title={item.title}
@@ -114,8 +112,12 @@ export default function LogoLoop({
         })}
       </div>
 
-      {/* animation */}
+      {/* KEY CHANGE: PAUSE ON HOVER */}
       <style jsx>{`
+        .logoloop-track:hover {
+          animation-play-state: paused;
+        }
+
         @keyframes logoloop {
           from {
             transform: translateX(0);

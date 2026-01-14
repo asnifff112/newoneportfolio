@@ -49,9 +49,9 @@ export default function Skills() {
       <div className="relative w-full">
         <LogoLoop
           logos={techLogos}
-          speed={120}
+          speed={100}
           direction="left"
-          logoHeight={44}
+          logoHeight={30}
           gap={48}
           scaleOnHover
           fadeOut
@@ -74,7 +74,7 @@ export default function Skills() {
           logos={techLogos}
           speed={80}
           direction="right"
-          logoHeight={40}
+          logoHeight={100}
           gap={56}
           fadeOut
           fadeOutColor="var(--bg)"
