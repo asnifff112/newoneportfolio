@@ -1,14 +1,7 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
-import { useRef, useMemo } from "react";
-import * as THREE from "three";
-
-
-import {  SiCss3, SiFigma, SiGithub, SiHtml5, SiJavascript, SiNextdotjs, SiNodedotjs, SiReact, SiThreedotjs, SiTypescript } from "react-icons/si";
-
-const ICONS = [
+import LogoLoop from "@/app/components/sections/LogoLoop";
+import {
   SiHtml5,
   SiCss3,
   SiJavascript,
@@ -18,72 +11,80 @@ const ICONS = [
   SiTypescript,
   SiGithub,
   SiFigma,
-  SiNodedotjs
-  
+  SiNodedotjs,
+  SiTailwindcss,
+} from "react-icons/si";
+
+const techLogos = [
+  { node: <SiHtml5 />, title: "HTML", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { node: <SiCss3 />, title: "CSS", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiThreedotjs />, title: "Three.js", href: "https://threejs.org" },
+  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
+  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
+  { node: <SiFigma />, title: "Figma", href: "https://figma.com" },
 ];
-
-function FloatingIcon({ Icon }: { Icon: any }) {
-  const ref = useRef<THREE.Group>(null);
-
-  const data = useMemo(() => ({
-    x: (Math.random() - 0.5) * 6,
-    y: (Math.random() - 0.5) * 4,
-    vx: (Math.random() * 0.3 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
-    vy: (Math.random() * 0.3 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
-  }), []);
-
-  useFrame((_, delta) => {
-    if (!ref.current) return;
-
-    data.x += data.vx * delta;
-    data.y += data.vy * delta;
-
-    if (data.x > 3.2 || data.x < -3.2) data.vx *= -1;
-    if (data.y > 2.2 || data.y < -2.2) data.vy *= -1;
-
-    ref.current.position.set(data.x, data.y, 0);
-  });
-
-  return (
-    <group ref={ref}>
-      <Html center>
-        <Icon size={42} color="white" />
-      </Html>
-    </group>
-  );
-}
-
-function FloatingIconsScene() {
-  return (
-    <>
-      {ICONS.map((Icon, i) => (
-        <FloatingIcon key={i} Icon={Icon} />
-      ))}
-    </>
-  );
-}
 
 export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative min-h-screen w-full overflow-hidden bg-[var(--bg)]"
+      className="relative min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col justify-center overflow-hidden"
     >
- 
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-[var(--text)] mb-3">
+      {/* ---------- TITLE ---------- */}
+      <div className="text-center mb-14 px-6">
+        <h2 className="text-4xl md:text-5xl font-bold mb-3">
           My Skills
         </h2>
-        <p className="text-sm md:text-base opacity-70 text-[var(--text)]">
+        <p className="opacity-70 text-sm md:text-base">
           Technologies I work with daily
         </p>
       </div>
 
-      <div className="absolute inset-0">
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-          <ambientLight intensity={1} />
-          <FloatingIconsScene />
-        </Canvas>
+      {/* ---------- LOGO LOOP ---------- */}
+      <div className="relative w-full">
+        <LogoLoop
+          logos={techLogos}
+          speed={120}
+          direction="left"
+          logoHeight={44}
+          gap={48}
+          scaleOnHover
+          fadeOut
+          fadeOutColor="var(--bg)"
+          ariaLabel="Technology skills"
+          className="
+            text-[var(--text)]
+            [&_.logoloop__node]:text-3xl
+            [&_.logoloop__node]:opacity-80
+            [&_.logoloop__node]:transition
+            [&_.logoloop__node:hover]:opacity-100
+            [&_.logoloop__node:hover]:text-[var(--accent)]
+          "
+        />
+      </div>
+
+      {/* ---------- SECOND ROW (OPTIONAL, OPPOSITE DIRECTION) ---------- */}
+      <div className="relative w-full mt-10">
+        <LogoLoop
+          logos={techLogos}
+          speed={80}
+          direction="right"
+          logoHeight={40}
+          gap={56}
+          fadeOut
+          fadeOutColor="var(--bg)"
+          ariaLabel="Technology skills secondary"
+          className="
+            text-[var(--text)]
+            opacity-60
+            [&_.logoloop__node:hover]:opacity-100
+          "
+        />
       </div>
     </section>
   );
