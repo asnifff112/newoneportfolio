@@ -13,16 +13,14 @@ interface LogoLoopProps {
   direction?: "left" | "right";
   gap?: number;
   logoSize?: number;
-  className?: string;
 }
 
 export default function LogoLoop({
   logos,
   speed = 80,
   direction = "left",
-  gap = 56,
-  logoSize = 48,
-  className = "",
+  gap = 60,
+  logoSize = 56,
 }: LogoLoopProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
@@ -38,7 +36,7 @@ export default function LogoLoop({
   }, [width, speed]);
 
   return (
-    <div className={`relative w-full overflow-hidden ${className}`}>
+    <div className="relative w-full overflow-hidden">
       <div
         ref={trackRef}
         className="flex w-max items-center"

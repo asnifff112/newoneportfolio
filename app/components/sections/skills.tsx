@@ -44,28 +44,23 @@ export default function Skills() {
       {/* ROW 1 */}
       <LogoLoop
         logos={techLogos}
-        speed={90}
+        speed={80}
         logoSize={56}
-        gap={64}
       />
 
       {/* ROW 2 */}
       <LogoLoop
         logos={techLogos}
-        speed={70}
+        speed={80}
+        logoSize={56}
         direction="right"
-        logoSize={52}
-        gap={60}
-        className="opacity-80"
       />
 
       {/* ROW 3 */}
       <LogoLoop
         logos={techLogos}
-        speed={50}
-        logoSize={48}
-        gap={56}
-        className="opacity-60"
+        speed={80}
+        logoSize={56}
       />
     </section>
   );
