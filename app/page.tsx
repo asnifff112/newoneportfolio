@@ -8,7 +8,9 @@ import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
 import MovingBanner from "./components/MovingBanner";
+
 import TextPressure from "./components/sections/TextPressure";
+import TextType from "./components/sections/TextType";
 
 import {
   FaInstagram,
@@ -20,10 +22,9 @@ import {
 
 export default function Page() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const typingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (!heroRef.current || !typingRef.current) return;
+    if (!heroRef.current) return;
 
     // Hero intro animation
     gsap.from(".hero-line", {
@@ -33,23 +34,6 @@ export default function Page() {
       duration: 1,
       ease: "power4.out",
     });
-
-    // Typing animation
-    const chars = typingRef.current.querySelectorAll(".char");
-    const typeTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-
-    typeTl
-      .set(chars, { opacity: 0 })
-      .to(chars, {
-        opacity: 1,
-        stagger: 0.08,
-        duration: 0.01,
-        ease: "none",
-      });
-
-    return () => {
-      typeTl.kill();
-    };
   }, []);
 
   return (
@@ -69,7 +53,7 @@ export default function Page() {
               Hello, I’m
             </p>
 
-            {/* TEXT PRESSURE NAME */}
+            {/* NAME — TEXT PRESSURE */}
             <div className="hero-line mb-6">
               <TextPressure
                 text="Asnif"
@@ -78,17 +62,16 @@ export default function Page() {
               />
             </div>
 
-            {/* TYPING ROLE */}
-            <h2
-              ref={typingRef}
-              className="hero-line text-2xl md:text-3xl font-light opacity-80 mb-8 flex"
-            >
-              {"Frontend Developer".split("").map((char, i) => (
-                <span key={i} className="char inline-block">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </h2>
+            {/* ROLE — TEXTTYPE (FIXED) */}
+            <div className="hero-line text-2xl md:text-3xl font-light opacity-80 mb-8">
+              <TextType
+                text={["Frontend Developer"]}
+                typingSpeed={75}
+                pauseDuration={2000}
+                showCursor={true}
+                cursorCharacter="|"
+              />
+            </div>
 
             <p className="hero-line max-w-md opacity-70 leading-relaxed">
               I build modern, animated, and high-performance web experiences
