@@ -1,127 +1,192 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
-import * as THREE from "three";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-function AsnifText() {
-  const textRef = useRef<THREE.Mesh>(null);
-
-  useFrame(({ clock, mouse }) => {
-    if (!textRef.current) return;
-
-    const t = clock.getElapsedTime();
-
-    textRef.current.position.y = Math.sin(t * 1.2) * 0.15;
-    textRef.current.rotation.x = mouse.y * 0.15;
-    textRef.current.rotation.y = mouse.x * 0.15;
-  });
-
-  return (
-    <Text
-      ref={textRef}
-      fontSize={1.8}
-      letterSpacing={-0.06}
-      position={[0, 0, 0]}
-      color="#565449" 
-    >
-      ASNIF
-    </Text>
-  );
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const threeRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scanStatus, setScanStatus] = useState("AWAITING_AUTHORIZATION");
 
-  
   useEffect(() => {
-    if (!sectionRef.current) return;
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          onEnter: () => setScanStatus("DECRYPTING_USER_DATA..."),
+        }
+      });
 
-    gsap.fromTo(
-      threeRef.current,
-      { x: -120, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-      }
-    );
+      // Terminal Window scale in
+      tl.from(".about-terminal", {
+        opacity: 0,
+        y: 40,
+        duration: 0.6,
+        ease: "power3.out"
+      });
 
-    gsap.fromTo(
-      textRef.current,
-      { x: 120, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        delay: 0.2,
-      }
-    );
+      // Command line typing
+      tl.from(".cmd-line", {
+        opacity: 0,
+        x: -10,
+        duration: 0.3
+      });
+
+      // Photo scanning animation
+      tl.from(".profile-scan", {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.8,
+        ease: "expo.out"
+      }, "-=0.2");
+
+      // Text lines staggered reveal
+      tl.from(".about-text-line", {
+        opacity: 0,
+        x: -20,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: () => setScanStatus("IDENTITY_VERIFIED [OK]")
+      }, "-=0.4");
+
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="
-        min-h-screen w-full
-        flex items-center justify-center
-        px-10
-        text-[var(--text)]
-      "
-    >
-      <div className="grid md:grid-cols-2 gap-20 max-w-7xl w-full items-center">
-
+    <section ref={sectionRef} id="about" className="w-full font-mono py-24 bg-[#0a0a0a]">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
         
-        <div
-          ref={threeRef}
-          className="
-            relative w-full h-[420px]
-            rounded-3xl overflow-hidden
-            bg-black/40
-            backdrop-blur-xl
-            border border-white/10
-            shadow-2xl
-          "
-        >
-          <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-            <ambientLight intensity={1} />
-            <directionalLight position={[5, 5, 5]} intensity={1.4} />
-            <pointLight position={[-5, -5, 5]} intensity={0.6} />
+        {/* Terminal Window */}
+        <div className="about-terminal border border-[#00ff41]/20 bg-black rounded shadow-[0_0_40px_rgba(0,255,65,0.05)] overflow-hidden relative">
+          
+          {/* Top Bar */}
+          <div className="bg-[#111] px-4 py-3 border-b border-[#00ff41]/20 flex justify-between items-center text-[10px] md:text-xs relative z-10">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+            </div>
+            <span className="text-white/40 uppercase tracking-widest">asnif_identity_module</span>
+            <span className="text-[#00ff41]">v1.0.0</span>
+          </div>
 
-            <AsnifText />
-          </Canvas>
+          <div className="p-6 md:p-10 relative z-10 flex flex-col lg:flex-row gap-10 md:gap-16">
+            
+            {/* Left Column: Stylized Profile Scanner */}
+            <div className="profile-scan lg:w-1/3 flex flex-col items-center justify-start relative">
+               
+               {/* Image Container with Scanning Effect */}
+               <div className="w-48 h-48 md:w-64 md:h-64 relative border border-[#00ff41]/40 bg-[#00ff41]/5 p-2 overflow-hidden group">
+                  {/* Decorative corners */}
+                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00ff41]" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00ff41]" />
+                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#00ff41]" />
+                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00ff41]" />
+
+                  {/* Scanning Laser Line */}
+                  <div className="absolute top-0 left-0 w-full h-1 bg-[#00ff41] shadow-[0_0_15px_#00ff41] z-20 animate-[scan_2s_ease-in-out_infinite]" />
+                  
+                  {/* Image (Replace with your actual photo path) */}
+                  <div className="relative w-full h-full overflow-hidden bg-black mix-blend-screen">
+                     <div className="absolute inset-0 bg-[#00ff41]/20 mix-blend-color z-10" />
+                     {/* UPDATE YOUR IMAGE PATH HERE */}
+                     <img 
+                       src='/img/asii.hous.jpeg'
+                       alt="Asnif Identity" 
+                       className="w-full h-full object-cover grayscale contrast-125 opacity-80"
+                     />
+                     {/* Static Overlay */}
+                     <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,65,0.1)_1px,transparent_1px)] bg-[size:100%_3px] pointer-events-none z-20" />
+                  </div>
+               </div>
+
+               {/* Bio-metric Status */}
+               <div className="mt-6 w-full text-center border border-[#00ff41]/20 bg-[#00ff41]/5 py-2">
+                  <p className="text-[10px] text-[#00ff41] tracking-widest uppercase">
+                    MATCH FOUND: 99.9%
+                  </p>
+                  <p className="text-[9px] text-white/40 mt-1">ID: ASNIF-7X9-DEV</p>
+               </div>
+            </div>
+
+            {/* Right Column: Bio Data Terminal output */}
+            <div className="lg:w-2/3 flex flex-col text-xs md:text-sm">
+               
+               <div className="cmd-line mb-6 border-l-2 border-[#00ff41] pl-4">
+                 <p className="text-white">
+                   <span className="text-red-500 font-bold">root@asnif:~#</span> whoami --verbose
+                 </p>
+                 <p className="mt-2 text-[10px] md:text-xs">
+                    <span className="text-[#00ff41]">{`>`} STATUS:</span> 
+                    <span className={scanStatus === "DECRYPTING_USER_DATA..." ? "animate-pulse text-yellow-400 font-bold ml-2" : "text-[#00ff41] font-bold ml-2"}>
+                      {scanStatus}
+                    </span>
+                 </p>
+               </div>
+
+               <div className="space-y-4 text-white/70">
+                 
+                 {/* Key-Value Pairs */}
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   <div className="about-text-line flex flex-col border border-white/5 bg-white/[0.02] p-3">
+                     <span className="text-[#00ff41]/50 text-[10px] mb-1">[ DESIGNATION ]</span>
+                     <span className="text-white font-bold tracking-wide">Creative Frontend Developer</span>
+                   </div>
+                   <div className="about-text-line flex flex-col border border-white/5 bg-white/[0.02] p-3">
+                     <span className="text-[#00ff41]/50 text-[10px] mb-1">[ BASE_LOCATION ]</span>
+                     <span className="text-white font-bold tracking-wide">Kerala, India</span>
+                   </div>
+                 </div>
+
+                 {/* Main Bio Text */}
+                 <div className="about-text-line border border-white/5 bg-white/[0.02] p-4 mt-4 relative">
+                    <div className="absolute top-0 left-0 w-1 h-full bg-[#00ff41]/50" />
+                    <p className="leading-relaxed mb-4">
+                      {`> `} I am a frontend developer specializing in building high-performance, immersive web experiences. I bridge the gap between heavy technical architecture and smooth, creative UI/UX.
+                    </p>
+                    <p className="leading-relaxed text-white/50">
+                      {`> `} With expertise in Next.js, React, and TypeScript, combined with advanced animation libraries like GSAP and Three.js, I engineer digital environments that are not just usable, but memorable. My current mission involves pushing the boundaries of what browsers can render natively.
+                    </p>
+                 </div>
+
+                 {/* Directives / Interests */}
+                 <div className="about-text-line flex flex-col gap-2 mt-4 pt-4 border-t border-white/10">
+                    <span className="text-[#00ff41] text-[10px] uppercase tracking-widest mb-2">CURRENT_DIRECTIVES:</span>
+                    <p className="text-white/60 flex items-center gap-2">
+                       <span className="text-cyan-400">[*]</span> Optimizing UI/UX micro-interactions.
+                    </p>
+                    <p className="text-white/60 flex items-center gap-2">
+                       <span className="text-cyan-400">[*]</span> Architecting seamless 3D web configurations.
+                    </p>
+                    <p className="text-white/60 flex items-center gap-2">
+                       <span className="text-cyan-400">[*]</span> Compiling reality into the DOM.
+                    </p>
+                 </div>
+
+               </div>
+            </div>
+
+          </div>
         </div>
-
-       
-        <div ref={textRef}>
-          <h2 className="text-5xl font-bold mb-6 tracking-wide">
-            About Me
-          </h2>
-
-          <p className="opacity-90 leading-relaxed mb-5">
-            I’m <span className="font-semibold">Asnif</span>, a frontend developer
-            passionate about building modern, animated, and high-performance web
-            experiences.
-          </p>
-
-          <p className="opacity-80 leading-relaxed mb-5">
-            I mainly work with{" "}
-            <b>Next.js</b>, <b>TypeScript</b>, <b>GSAP</b>, and{" "}
-            <b>Three.js</b> to craft smooth, immersive, and premium interfaces.
-          </p>
-
-          <p className="opacity-70 leading-relaxed">
-            I believe great UI is a balance of motion, clarity, and intention.
-          </p>
-        </div>
-
       </div>
+
+      {/* Custom Animation for Scanner Laser */}
+      <style jsx>{`
+        @keyframes scan {
+          0% { top: 0; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+      `}</style>
     </section>
   );
 }

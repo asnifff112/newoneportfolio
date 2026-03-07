@@ -25,8 +25,7 @@ export default function Footer() {
         Asnif
       </h2>
       <p className="text-sm opacity-70 mb-8 text-center max-w-md">
-        Frontend Developer building immersive web experiences with
-        Next.js, GSAP & Three.js
+        Next.js & GSAP Enthusiast | Self-taught Developer building the future of the web with JS/TS.
       </p>
 
    
@@ -48,12 +47,7 @@ export default function Footer() {
         >
           LinkedIn
         </a>
-        <a
-          href="mailto:asnifkl@gmail.com"
-          className="hover:text-[var(--accent-light)] transition"
-        >
-          Email
-        </a>
+       
       </div> 
       <p className="mt-10 text-xs opacity-50">
         © {new Date().getFullYear()} Asnif · All rights reserved

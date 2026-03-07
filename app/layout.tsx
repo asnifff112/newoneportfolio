@@ -1,11 +1,36 @@
+import type { Metadata } from "next";
+import { Space_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/navbar";
-import BackgroundScene from "@/app/components/three/BackgroundScene"
-import Footer from "./components/footer";
+import ClickSpark from "@/components/ClickSpark";
 
-export const metadata = {
-  title: "Asnif Portfolio",
-  description: "Next.js + Tailwind + GSAP Portfolio",
+// Terminal Font
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Asnif | Creative Frontend Developer",
+  description:
+    "High-performance terminal style portfolio built with Next.js, Tailwind, GSAP and Three.js",
+  keywords: [
+    "Asnif",
+    "Frontend Developer",
+    "Next.js Portfolio",
+    "GSAP",
+    "Three.js",
+    "Creative Developer",
+  ],
+  authors: [{ name: "Asnif" }],
+  creator: "Asnif",
+  openGraph: {
+    title: "Asnif | Creative Frontend Developer",
+    description:
+      "Terminal-inspired portfolio built with Next.js, GSAP and Three.js",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -14,13 +39,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        <main className="pt-20 relative z-10">
-        {children}
-        <Footer/>
-        </main>
+    <html
+      lang="en"
+      className={`scroll-smooth ${spaceMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body
+        className="
+        bg-[#050505]
+        text-[#00ff41]
+        font-space-mono
+        antialiased
+        overflow-x-hidden
+      "
+      >
+        {/* Global Click Spark Effect */}
+        <ClickSpark
+          sparkColor="#00ff41"
+          sparkSize={12}
+          sparkRadius={20}
+          sparkCount={10}
+          duration={400}
+        >
+          {/* Main App */}
+          <main className="relative z-10 min-h-screen">
+            {children}
+          </main>
+        </ClickSpark>
       </body>
     </html>
   );
