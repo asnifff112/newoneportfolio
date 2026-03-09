@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
-import ClickSpark from "@/components/ClickSpark";
+
 
 // Terminal Font
 const spaceMono = Space_Mono({
@@ -12,7 +12,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Asnif | Creative Frontend Developer",
+  title: "Asnif | React & Next.js Specialist",
   description:
     "High-performance terminal style portfolio built with Next.js, Tailwind, GSAP and Three.js",
   keywords: [
@@ -54,18 +54,12 @@ export default function RootLayout({
       "
       >
         {/* Global Click Spark Effect */}
-        <ClickSpark
-          sparkColor="#00ff41"
-          sparkSize={12}
-          sparkRadius={20}
-          sparkCount={10}
-          duration={400}
-        >
+       
           {/* Main App */}
           <main className="relative z-10 min-h-screen">
             {children}
           </main>
-        </ClickSpark>
+        
       </body>
     </html>
   );

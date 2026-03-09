@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Sections & Components
 import About from "./components/sections/About";
-import Skills from "./components/sections/Skills";
+import Skills from "@/app/components/sections/skills"
 import Projects from "./components/sections/Projects";
-import Contact from "./components/sections/Contact";
+import Contact from "@/app/components/sections/contact"
 import MovingBanner from "./components/MovingBanner";
 import Navbar from "@/app/components/navbar"; 
 import TerminalEntry from "./components/sections/TerminalEntry"; 
@@ -144,10 +144,7 @@ export default function Page() {
             </div>
 
             {/* Scroll Indicator Variety */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-20">
-               <span className="text-[8px] tracking-[0.5em] uppercase">Decrypt_Below</span>
-               <div className="w-[1px] h-16 bg-gradient-to-b from-[#00ff41] to-transparent" />
-            </div>
+            
           </section>
 
           {/* Other Sections */}
